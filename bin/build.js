@@ -48,9 +48,9 @@ function updateGitignore() {
     }
 
     function appendDataToFile() {
-        const gitignore_content = `
-          \n# YouCompleteMe javascript autocomplete file
-          \n${constants.TERN_PROJECT_FILE}`;
+        const gitignore_content = `\n
+          # YouCompleteMe javascript autocomplete file
+          ${constants.TERN_PROJECT_FILE}`;
         fs.appendFileSync(constants.GITIGNORE_FILE, gitignore_content);
     }
 
