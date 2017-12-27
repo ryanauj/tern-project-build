@@ -17,6 +17,7 @@ function createDefaultTernProjectFile() {
 
     verifyFileDoesNotExist();
     createFile();
+    printSuccessMessage();
 
     function verifyFileDoesNotExist() {
         if (fileExists(constants.TERN_PROJECT_FILE)) {
@@ -27,6 +28,9 @@ function createDefaultTernProjectFile() {
     function createFile() {
         let contents = prettyStringify(constants.DEFAULT_NODE_CONTENTS);
         fs.writeFileSync(constants.TERN_PROJECT_FILE, contents);
+    }
+
+    function printSuccessMessage() {
         print(`${constants.TERN_PROJECT_FILE} has been created!`);
     }
 } 
@@ -35,6 +39,7 @@ function updateGitignore() {
 
     verifyFileExists();
     appendDataToFile();
+    printSuccessMessage();
 
     function verifyFileExists() {
         if (!fileExists(constants.GITIGNORE_FILE)) {
@@ -43,9 +48,15 @@ function updateGitignore() {
     }
 
     function appendDataToFile() {
-        fs.appendFileSync(
-            constants.GITIGNORE_FILE, constants.GITIGNORE_CONTENT);
-        print(constants.TERN_PROJECT_FILE + 
+        const gitignore_content = `
+          \n# YouCompleteMe javascript autocomplete file
+          \n${constants.TERN_PROJECT_FILE}`;
+        fs.appendFileSync(constants.GITIGNORE_FILE, gitignore_content);
+    }
+
+    function printSuccessMessage() {
+        print(
+            constants.TERN_PROJECT_FILE + 
             ' was appended to the ' + 
             constants.GITIGNORE_FILE);
     }
