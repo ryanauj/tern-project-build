@@ -1,0 +1,18 @@
+{
+  "name": "@ryanauj/tern-project-build",
+  "version": "1.0.0",
+  "description": "Simple command line script for building a .tern-project file for javascript projects",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanauj/tern-project-build.git"
+  },
+  "author": "Ryan Jackson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanauj/tern-project-build/issues"
+  },
+  "homepage": "https://github.com/ryanauj/tern-project-build#readme",
+  "bin": {
+    "tern-project-build": "bin/build.js"
+  }
+}
