@@ -26,7 +26,7 @@ function createDefaultTernProjectFile() {
     }
 
     function createFile() {
-        let contents = prettyStringify(constants.DEFAULT_NODE_CONTENTS);
+        let contents = prettyStringify(constants.TERN_PROJECT_CONTENTS);
         fs.writeFileSync(constants.TERN_PROJECT_FILE, contents);
     }
 
@@ -38,6 +38,7 @@ function createDefaultTernProjectFile() {
 function updateGitignore() {
 
     verifyFileExists();
+    verifyStringDoesNotExistInFile();
     appendDataToFile();
     printSuccessMessage();
 
@@ -47,10 +48,20 @@ function updateGitignore() {
         }
     }
 
+    function verifyStringDoesNotExistInFile() {
+        let current_content = fs.readFileSync(constants.GITIGNORE_FILE);
+        if (current_content.includes(constants.TERN_PROJECT_FILE)) {
+            let already_exists_in_file_error = constants.TERN_PROJECT_FILE
+                                               + " already exists in "
+                                               + constants.GITIGNORE_FILE
+            throw already_exists_in_file_error;
+        }
+    }
+
     function appendDataToFile() {
-        const gitignore_content = `\n
-          # YouCompleteMe javascript autocomplete file
-          ${constants.TERN_PROJECT_FILE}`;
+        let gitignore_content =
+            '\n# YouCompleteMe javascript autocomplete file\n' 
+            + constants.TERN_PROJECT_FILE;
         fs.appendFileSync(constants.GITIGNORE_FILE, gitignore_content);
     }
 
